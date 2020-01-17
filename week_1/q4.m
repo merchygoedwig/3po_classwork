@@ -50,10 +50,9 @@ x=x';
 
 switch exitflag
     case 1
-x=x';
+        x=x';
         formatSpec='There is a total cost of £%6.2f with units produced internally, externally and stored below.\n';
         fprintf(formatSpec,fval)
-
         T=array2table(x);
         T.Properties.VariableNames={'IUM1','IUM2','IUM3','IUM4','IUM5','EUM1','EUM2','EUM3','EUM4','EUM5','NS1','NS2','NS3','NS4','NS5'}
     otherwise
