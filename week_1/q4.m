@@ -60,6 +60,6 @@ switch exitflag
 end
 
 function debug(e,m)
-formatSpec='The simulation has halted!\nExit Flag: %i\nMessage: %s\n';
+formatSpec='The simulation has halted!\nExit Flag: %i\nMessage: %s\n<a href="matlab:doc linprog">Click here to see linprog documentation</a>\n';
 fprintf(formatSpec,e,m);
 end
