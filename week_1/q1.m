@@ -14,5 +14,5 @@ ub=[70;50];
 
 fval=-fval;
 
-formatSpec='A profit of £%4.2f is to be made by producing %2.0f low-cost and %2.0f high-cost units respectively';
+formatSpec='A profit of £%4.2f is to be made by producing %2.0f low-cost\nand %2.0f high-cost units respectively\n';
 fprintf(formatSpec,fval,x(1),x(2))
