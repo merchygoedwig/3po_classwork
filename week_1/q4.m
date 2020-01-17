@@ -16,8 +16,6 @@ for a=1:m
 end
 lb=zeros(nC*m,1);
 lb(end)=300;
-% ub=zeros(nC*m,1);
-% ub(end-m+1:end)=1900;
 
 f=zeros(m,1);
 
@@ -47,11 +45,22 @@ compConstr=vertcat(compConstr,construct2);
 constr=[simpConstr;compConstr];
 constrVar=vertcat(simpConstrVar,compConstrVar);
 
-[x,fval]=linprog(f,constr,constrVar,[],[],lb);
+[x,fval,exitflag,output]=linprog(f,constr,constrVar,[],[],lb);
 x=x';
 
-formatSpec='There is a total cost of £%6.2f with units produced internally, externally and stored below.\n';
-fprintf(formatSpec,fval)
+switch exitflag
+    case 1
+x=x';
+        formatSpec='There is a total cost of £%6.2f with units produced internally, externally and stored below.\n';
+        fprintf(formatSpec,fval)
 
-T=array2table(x);
-T.Properties.VariableNames={'IUM1','IUM2','IUM3','IUM4','IUM5','EUM1','EUM2','EUM3','EUM4','EUM5','NS1','NS2','NS3','NS4','NS5'}
+        T=array2table(x);
+        T.Properties.VariableNames={'IUM1','IUM2','IUM3','IUM4','IUM5','EUM1','EUM2','EUM3','EUM4','EUM5','NS1','NS2','NS3','NS4','NS5'}
+    otherwise
+        debug(exitflag,output.message)
+end
+
+function debug(e,m)
+formatSpec='The simulation has halted!\nExit Flag: %i\nMessage: %s\n';
+fprintf(formatSpec,e,m);
+end
